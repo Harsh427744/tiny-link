@@ -1,25 +1,30 @@
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function DELETE(req: Request, context: { params: Promise<{ code: string }> }) {
-  try {
-    const { code } = await context.params;
+export async function GET(
+  req: Request,
+  props: { params: Promise<{ code: string }> }
+) {
+  const { code } = await props.params;
 
-    const link = await prisma.link.findUnique({
-      where: { code },
-    });
+  const link = await prisma.link.findUnique({ where: { code } });
+  if (!link) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-    // If already deleted → return 404 silently, not an error
-    if (!link) {
-      return Response.json({ ok: true, message: "Already deleted" }, { status: 200 });
-    }
+  return NextResponse.json(link);
+}
 
-    await prisma.link.delete({
-      where: { code },
-    });
+export async function DELETE(
+  req: Request,
+  props: { params: Promise<{ code: string }> }
+) {
+  const { code } = await props.params;
 
-    return Response.json({ ok: true });
-  } catch (e) {
-    console.error("Delete error:", e);
-    return Response.json({ error: "Server failed" }, { status: 500 });
+  const link = await prisma.link.findUnique({ where: { code } });
+  if (!link) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
+
+  await prisma.link.delete({ where: { code } });
+
+  return NextResponse.json({ ok: true });
 }
