@@ -5,7 +5,7 @@ Built as part of a take-home assignment.
 
 ## 🚀 Live Demo
 **Your Vercel URL:**  
-`https://your-vercel-domain.vercel.app`
+`https://tiny-link-harsh.vercel.app/`
 
 ---
 
