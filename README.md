@@ -1,14 +1,21 @@
 # 🔗 TinyLink – Production-Ready URL Shortener
 
-> Minimal URL shortener with custom codes, click tracking, stats dashboard, and delete functionality (Next.js 16 + Neon PostgreSQL + Prisma)
+> Minimal URL shortener with DNS validation, custom codes, click tracking, and real-time analytics (Next.js 15 + Neon PostgreSQL + Prisma)
 
 [![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Neon](https://img.shields.io/badge/Neon_DB-00E599?style=for-the-badge&logo=neondatabase&logoColor=white)](https://neon.tech/)
 [![Prisma](https://img.shields.io/badge/Prisma-3F37C9?style=for-the-badge&logo=prisma&logoColor=white)](https://prisma.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
-**Live Demo:** [https://tiny-link-harsh.vercel.app/](https://tiny-link-harsh.vercel.app/)
+**🚀 Live Demo:** [https://tiny-link-harsh.vercel.app/](https://tiny-link-harsh.vercel.app/)
+
+---
+
+## 📸 Dashboard Preview
+
+![TinyLink Dashboard](./public/dashboard.png)
 
 ---
 
@@ -28,16 +35,18 @@
 
 ## 🎯 Overview
 
-**TinyLink** is a production-ready URL shortener built for a take-home assignment, featuring:
+**TinyLink** is a production-ready URL shortener built with enterprise-grade validation, featuring:
 
-- Custom short codes with duplicate protection
-- Click tracking with timestamps
-- Stats dashboard per link (`/code/:code`)
-- Delete functionality
-- Clean, responsive dashboard UI
-- Deployed on Vercel with Neon PostgreSQL
+- **DNS Verification** – Only accepts real, existing domains
+- **Custom short codes** with duplicate protection
+- **Real-time click tracking** with timestamps
+- **Beautiful gradient UI** with toast notifications
+- **Instant updates** without page reload
+- **Copy-to-clipboard** functionality
+- **Delete functionality** with confirmation
+- **Deployed on Vercel** with Neon PostgreSQL
 
-Demonstrates Next.js 16 App Router, Prisma ORM, and full-stack TypeScript patterns.
+Demonstrates Next.js 15 App Router, Prisma ORM, DNS validation, and full-stack TypeScript patterns.
 
 ---
 
@@ -45,39 +54,63 @@ Demonstrates Next.js 16 App Router, Prisma ORM, and full-stack TypeScript patter
 
 ### 🔗 Core URL Shortening
 
-- **Shorten any URL** → `tiny.link/abc123`
-- **Custom codes** (e.g., `tiny.link/mylink`)
-- **Duplicate protection** – rejects existing codes
-- **HTTP 302 redirects** with click counting
-- **Last clicked timestamp** tracking
+- ✅ **Shorten any URL** → tiny-link-harsh.vercel.app/abc123
+- ✅ **Auto-add https://** for user convenience (e.g., google.com → https://google.com)
+- ✅ **DNS verification** – Rejects fake domains (e.g., codechef.co fails, codechef.com works)
+- ✅ **Custom codes** (e.g., tiny.link/mylink)
+- ✅ **Duplicate protection** – Rejects existing codes with clear error message
+- ✅ **Smart redirects** with click counting
+- ✅ **Last clicked timestamp** tracking
 
 ### 📊 Analytics & Management
 
-- **Stats page** `/code/abc123` shows total clicks + timestamps
-- **Delete links** from dashboard
-- **List all your links** with click counts
-- **Inline form validation** + loading states
-- **Copy-to-clipboard** buttons
+- 📈 **Real-time stats** – Total clicks + last click timestamp per link
+- 🗑️ **Delete links** with loading state and confirmation
+- 📋 **List all your links** with beautiful card layout
+- 📋 **Copy-to-clipboard** with toast notification
+- ⚡ **Instant UI updates** – No page reload needed
+- 🎨 **Toast notifications** for all actions (success/error)
+
+### 🛡️ Validation & Security
+
+- 🔍 **3-Layer validation**:
+  1. Format check (valid URL structure)
+  2. TLD check (200+ valid domain extensions)
+  3. **DNS check** (domain must actually exist)
+- 🚫 **Rejects invalid URLs**:
+  - ❌ Fake TLDs (e.g., .ap, .xyz123)
+  - ❌ Non-existent domains (e.g., fake-site-12345.com)
+  - ❌ Malformed URLs
+- ✅ **Accepts all valid formats**:
+  - google.com
+  - `https://github.com
+  - perplexity.ai
+  - vercel.app
 
 ### 🎨 UI/UX
 
-- Responsive dashboard design
-- Real-time validation feedback
-- Clean table with sortable clicks
-- Error handling + success states
-- Health check endpoint `/healthz`
+- 🌈 **Modern gradient design** with animations
+- 📱 **Fully responsive** – Mobile, tablet, desktop
+- 🎯 **Real-time validation feedback**
+- ⚡ **Loading states** on all buttons
+- 🎉 **Success animations** with toast
+- 🚀 **Smooth transitions** and hover effects
+- 📊 **Stats visualization** with icons
+- ❌ **Clear error messages** with context
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer     | Technologies                                      |
-|-----------|---------------------------------------------------|
-| Framework | Next.js 16 (App Router), TypeScript               |
-| Database  | Neon PostgreSQL, Prisma ORM                       |
-| UI        | Tailwind CSS, React Hook Form, Zod validation     |
-| Deployment| Vercel (serverless), Neon (serverless Postgres)   |
-| Dev Tools | ESLint, Prettier, Prisma Studio, GitHub           |
+| Layer          | Technologies                                                |
+|----------------|-------------------------------------------------------------|
+| **Framework**  | Next.js 15 (App Router), TypeScript, React 19              |
+| **Database**   | Neon PostgreSQL (Serverless), Prisma ORM                    |
+| **Styling**    | Tailwind CSS, CSS Gradients, Animations                     |
+| **Validation** | DNS Resolution (Node.js `dns/promises`), URL API            |
+| **UI Library** | React Hot Toast (notifications)                             |
+| **Deployment** | Vercel (serverless functions + edge network)                |
+| **Dev Tools**  | ESLint, Prettier, Prisma Studio, TypeScript Strict Mode     |
 
 ---
 
